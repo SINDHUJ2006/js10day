@@ -1,0 +1,46 @@
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:20px;
+}
+
+.container{
+    width:80%;
+    margin:auto;
+}
+
+h2{
+    text-align:center;
+}
+
+.post{
+    background:white;
+    padding:15px;
+    margin:10px 0;
+    border-radius:8px;
+    box-shadow:0 0 5px gray;
+}
+
+.buttons{
+    text-align:center;
+    margin-top:20px;
+}
+
+button{
+    padding:10px 20px;
+    margin:5px;
+    border:none;
+    background:blue;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkblue;
+}
+
+button:disabled{
+    background:gray;
+    cursor:not-allowed;
+}
