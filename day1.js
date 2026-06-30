@@ -1,48 +1,24 @@
-const api = "https://jsonplaceholder.typicode.com/posts";
-let posts = [];
-let currentPage = 1;
-const perPage = 10;
-const postDiv = document.getElementById("posts");
-const page = document.getElementById("page");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
+const usersDiv = document.getElementById("users");
 
-async function getPosts() {
-    const response = await fetch(api);
-    posts = await response.json();
-    showPosts();
-}
+fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response => response.json())
+    .then(users => {
 
-function showPosts() {
-    postDiv.innerHTML = "";
+        users.forEach(user => {
 
-    let start = (currentPage - 1) * perPage;
-    let end = start + perPage;
+            usersDiv.innerHTML += `
+                <div class="user">
+                    <h3>${user.name}</h3>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                </div>
+            `;
 
-    let currentPosts = posts.slice(start, end);
+        });
 
-    currentPosts.forEach(post => {
-        postDiv.innerHTML += `
-            <h3>${post.title}</h3>
-            <p>${post.body}</p>
-            <hr>
-        `;
+    })
+    .catch(error => {
+
+        usersDiv.innerHTML = "<h3>Failed to fetch users!</h3>";
+        console.log(error);
+
     });
-
-    page.innerText = "Page " + currentPage;
-
-    prev.disabled = currentPage === 1;
-    next.disabled = currentPage === Math.ceil(posts.length / perPage);
-}
-
-next.addEventListener("click", () => {
-    currentPage++;
-    showPosts();
-});
-
-prev.addEventListener("click", () => {
-    currentPage--;
-    showPosts();
-});
-
-getPosts();
